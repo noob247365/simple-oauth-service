@@ -1,0 +1,22 @@
+{
+  "name": "simple-oauth-service",
+  "version": "1.0.0",
+  "description": "A simple service that will cache OAuth codes for a short period",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noob247365/simple-oauth-service.git"
+  },
+  "author": "noob247365",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/noob247365/simple-oauth-service/issues"
+  },
+  "homepage": "https://github.com/noob247365/simple-oauth-service#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
