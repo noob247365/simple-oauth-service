@@ -5,7 +5,7 @@ const port = process.env.PORT ?? 3000;
 const codes = {};
 
 app.get('/', (req, res) => res.send('Hello World!'));
-app.get(`/:guid`, (req, res) => {
+app.get('/:guid', (req, res) => {
     if (!codes.hasOwnProperty(req.params.guid)) {
         res.json({ success: false, message: `Unknown ID: '${req.params.guid}'` });
         return;
@@ -28,13 +28,17 @@ app.get('/:guid/callback', (req, res) => {
     codes[req.params.guid] = JSON.parse(JSON.stringify(req.query));
     res.json({ success: true });
 });
-app.get(`/:guid/delete`, (req, res) => {
+app.get('/:guid/delete', (req, res) => {
     if (!codes.hasOwnProperty(req.params.guid)) {
         res.json({ success: false, message: `Unknown ID: '${req.params.guid}'` });
         return;
     }
     delete codes[req.params.guid];
     res.json({ success: true });
+});
+
+app.get('/spotify-callback', (req, res) => {
+    res.json(JSON.parse(JSON.stringify(req.query)));
 });
 
 app.listen(port, () => console.log(`Listening on ${port}`));
