@@ -11,7 +11,16 @@ app.get('/key/create/:guid', (req, res) => {
         res.json({ success: false, message: `Already present in cache: '${req.params.guid}'` });
         return;
     }
+    if (req.params.guid.length < 10) {
+        res.json({ success: false, message: `Must provide an ID with at least 10 characters` });
+        return;
+    }
     codes[req.params.guid] = null;
+    res.json({ success: true });
+});
+app.get('/key/delete/all12345', (req, res) => {
+    for (let key of Object.keys(codes))
+        delete codes[key];
     res.json({ success: true });
 });
 app.get('/key/delete/:guid', (req, res) => {
@@ -21,6 +30,9 @@ app.get('/key/delete/:guid', (req, res) => {
     }
     delete codes[req.params.guid];
     res.json({ success: true });
+});
+app.get('/key/view/all12345', (req, res) => {
+    res.json({ success: true, result: codes });
 });
 app.get('/key/view/:guid', (req, res) => {
     if (!codes.hasOwnProperty(req.params.guid)) {
